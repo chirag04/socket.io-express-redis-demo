@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "socket.io-express-redis-demo",
   "version": "0.0.1",
   "private": true,
   "scripts": {

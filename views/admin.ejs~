@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Prime Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+	<style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
+	
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+	  var socket = io.connect('http://localhost:3000');
+	  socket.on('task', function (data) {
+		var html = '<p>'+data+'</p>';	    
+		$('#tasks').append(html);
+	  });
+	</script>
+
+	<script>
+		function addTask() {
+			var task = $('#addtask').val();
+			socket.emit('addtask', {"task":task});
+		}	
+	
+	</script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+		
+		<input type="text" id="addtask" name="addtask"/>
+		<button class="btn" onclick="addTask();">Publish Task</button>
+		<h5>Tasks:</h5>		
+		<div id="tasks" class="well">
+		
+		</div>
+      
+    </div> <!-- /container -->
+	
+    <script src="/javascripts/jquery-1.8.0.min.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+
+  </body>
+</html>
